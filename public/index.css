@@ -1,0 +1,40 @@
+html,body {
+    margin:0;
+    padding:0;
+    overflow: hidden;
+}
+#app {
+    min-height:100vh;
+    overflow-x: scroll;
+}
+@media (max-width: 640px) {
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+    #app {
+        width: 640px;
+        margin: 0 auto;
+    }
+
+}
+@media (min-width:320px) {
+    #app {
+        width: 100%;
+        padding: 10px;
+        margin: 0 auto;
+        margin-bottom:0 !important;
+    }
+
+}
+
+@media (min-width: 640px) {
+    #app {
+        width: 640px;
+        margin: 0 auto;
+    }
+
+}
