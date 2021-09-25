@@ -15,6 +15,7 @@ export default {
                 console.log('Error opening db', e);
                 reject('Error');
             }
+
             request.onsuccess = e => {
                 DB = e.target.result;
                 resolve(DB);
