@@ -6,6 +6,7 @@
           </div>
 
           <button @click="click_btn">{{ $ml.get('click') }}</button>
+
           <div class="control">
               <button @click="open">My</button>
               <button @click="open_upgrade">Upgrade</button>
@@ -26,18 +27,21 @@ import Upgrade from './components/Upgrade.vue'
 import store from './store'
 import api from '@/api/idb.js'
 import { MLBuilder } from 'vue-multilanguage'
+import {Howl, Howler} from 'howler';
+
+
 
 export default {
   name: 'App',
   data() {
       return {
-
+        sound_click: ''
       }
   },
   components: { Modal, My, Upgrade },
   methods: {
       click_btn: function () {
-
+        this.sound_click.play();  //Play sound effect
       },
       open: function () {
           this.$refs.my_modal.open()
@@ -50,6 +54,11 @@ export default {
       }
   },
   mounted: function () {
+    this.sound_click = new Howl({
+      src: [require('./assets/click.wav')],
+      html5: true
+    });
+    
     /*store.dispatch('load').then(() => {
         this.$ml.change(store.state.lang);
 

@@ -8,6 +8,7 @@
     "doc": "documentation build src/** -f html --github -o docs"
   },
   "dependencies": {
+    "howler": "^2.2.3",
     "papercss": "^1.8.2",
     "vue": "^2.6.11",
     "vue-multilanguage": "^4.0.10",
