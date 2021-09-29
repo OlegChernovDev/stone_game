@@ -1,8 +1,10 @@
 <template>
   <div id="app" class="paper">
-        текущая цель
+        текущее значение кликов: 
+
+        <v-number :speed="100" v-model="someNumber"></v-number>
           <div class="progress margin-bottom">
-              <div class="bar muted w-100"></div>
+              <div class="bar muted" :class="'w-'+someNumber"></div>
           </div>
 
           <button @click="click_btn">{{ $ml.get('click') }}</button>
@@ -20,28 +22,29 @@
 
 <script>
 import Modal from './components/Modal.vue'
-
 import My from './components/My.vue'
 import Upgrade from './components/Upgrade.vue'
 
 import store from './store'
 import api from '@/api/idb.js'
+
 import { MLBuilder } from 'vue-multilanguage'
 import {Howl, Howler} from 'howler';
-
-
+import { VNumber } from "@maxflex/v-number";
 
 export default {
   name: 'App',
   data() {
       return {
-        sound_click: ''
+        sound_click: '',
+        someNumber: 0
       }
   },
-  components: { Modal, My, Upgrade },
+  components: { Modal, My, Upgrade, VNumber },
   methods: {
       click_btn: function () {
         this.sound_click.play();  //Play sound effect
+        this.someNumber++;
       },
       open: function () {
           this.$refs.my_modal.open()
@@ -58,7 +61,7 @@ export default {
       src: [require('./assets/click.wav')],
       html5: true
     });
-    
+
     /*store.dispatch('load').then(() => {
         this.$ml.change(store.state.lang);
 
