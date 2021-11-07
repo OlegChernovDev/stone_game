@@ -1,8 +1,14 @@
 export default {
     ru: {
-        click: 'Клик'
+        click: 'Клик',
+        progress: 'Достижения',
+        settings: 'Настройки',
+        change_lang: 'English'
     },
     en: {
-        click: 'Click'
+        click: 'Click',
+        progress: 'Achievement',
+        settings: 'Settings',
+        change_lang: 'Русский'
     }
 }

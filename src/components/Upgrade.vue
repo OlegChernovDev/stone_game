@@ -1,8 +1,11 @@
 <template>
 	<div>
+		<Modal title="Достижения" ref="modal">
 
+			<div class="progress-list">
+				<div v-for="item in $store.state.progress" v-if="item.status" class="alert alert-primary">{{ item.text }}</div><hr>
+			</div>
 
-		<Modal title="Upgrade" ref="modal">
 			<Notification ref="primary" alert="primary"></Notification>
         	<Notification ref="warning" alert="warning"></Notification>
         	<Notification ref="danger" alert="danger"></Notification>
@@ -18,9 +21,10 @@
 	import Notification from './Notification.vue'
 
 	import Modal from './Modal.vue'
+	import store from '.././store'
 
 	export default {
-		name: 'Upgrade',
+		name: 'Progress',
 		components: { Modal, Notification },
 		methods: {
 			open_primary: function() {
@@ -43,5 +47,9 @@
 </script>
 
 <style scoped>
-
+@media (max-width: 640px) {
+	.progress-list {
+		max-height: 400px;
+	}
+}
 </style>
