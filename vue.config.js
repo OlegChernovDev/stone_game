@@ -1,4 +1,7 @@
 module.exports = {
   publicPath: '',
-  productionSourceMap: false
+  productionSourceMap: false,
+  devServer: {
+    https: true
+  },
 }

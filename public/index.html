@@ -1,19 +1,53 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
 
-    <link rel="stylesheet" href="index.css">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="icon" href="<%= BASE_URL %>favicon.ico">
+
+	<link rel="stylesheet" href="index.css">
+	<title><%= htmlWebpackPlugin.options.title %></title>
+
+	<script src="https://yandex.ru/games/sdk/v2"></script>
+	<script>
+		var ysdkG;
+		YaGames
+			.init({
+				adv: {
+					onAdvClose: wasShown => {
+						console.info('adv closed!');
+					}
+				},
+				screen: {
+					fullscreen: false
+				}
+			})
+			.then(ysdk => {
+				ysdkG = ysdk;
+				ysdk.adv.showFullscreenAdv({
+					callbacks: {
+						onClose: function (wasShown) {
+							console.log('Closed')
+						},
+						onError: function (error) {
+
+						}
+					}
+				});
+
+			});
+	</script>
+</head>
+
+<body>
+	<noscript>
+		<strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+			Please enable it to continue.</strong>
+	</noscript>
+	<div id="app"></div>
+	<!-- built files will be auto injected -->
+</body>
+
 </html>

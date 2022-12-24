@@ -1,4 +1,4 @@
-const DB_NAME = 'stonegame';
+const DB_NAME = 'stonegame02';
 const STORAGE_NAME = 'data';
 const DB_VERSION = 1;
 let DB;

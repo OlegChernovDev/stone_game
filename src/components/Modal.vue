@@ -35,13 +35,36 @@
 	}
 </script>
 
-<style scoped>
+<style >
 
 .modal-body {
-
     width: 60%;
 }
 
+.modal-text {
+    overflow: scroll;
+    max-height: 70vh;
+}
+
+.block {
+        border-bottom-left-radius: 15px 255px !important;
+        border-bottom-right-radius: 225px 15px !important;
+        border-top-left-radius: 255px 15px !important;
+        border-top-right-radius: 15px 225px !important;
+        transition: all 235ms ease 0s !important;
+        box-shadow: 15px 28px 25px -18px rgb(0 0 0 / 20%) !important;
+        transition: all 235ms ease-in-out 0s !important;
+        color: #41403e !important;
+        color: var(--primary);
+        border-color: #41403e;
+        border-color: var(--primary);
+        background-color: #41403e;
+        background-color: var(--main-background);
+        align-self: center;
+        background-image: none;
+        border-style: solid !important;
+        border-width: 2px;
+    }
 @media (max-width: 640px) {
     .modal-body {
         width: 100%;
