@@ -2,6 +2,7 @@ module.exports = {
   publicPath: '',
   productionSourceMap: false,
   devServer: {
-    https: true
+    https: true,
+    hotOnly: true
   },
 }

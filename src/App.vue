@@ -1,5 +1,6 @@
 <template>
 	<div id="app" class="paper">
+		
 		<h2 style="text-align: center">
 			<v-number
 				:speed="100"
@@ -7,7 +8,7 @@
 			></v-number>
 		</h2>
 		<p style="text-align: center">+ {{ $store.state.auto_click }} в сек.</p>
-		<button class="btn-block btn-secondary" @click.prevent="click_btn">
+		<button class="btn-block btn-secondary click" @click.prevent="click_btn">
 			{{ $ml.get("click") }}
 		</button>
 		<br /><br />
@@ -19,19 +20,17 @@
 			<div class="col col-4">
 				<button class="btn-block" @click="open_shop">Магазин</button>
 			</div>
-			<div class="col col-4"></div>
+			<div class="col col-4">
+				<button class="btn-block" @click="open_settings">
+					{{ $ml.get("settings") }}
+				</button>
+			</div>
 		</div>
-		<button @click="test">tttest</button>
-		<button class="btn-block" @click="open_upgrade">
-			{{ $ml.get("progress") }}
-		</button>
-		<button class="btn-block" @click="open_settings">
-			{{ $ml.get("settings") }}
-		</button>
 		<Bonus ref="bonus_modal"></Bonus>
 		<Shop ref="shop_modal"></Shop>
 		<Upgrade ref="upgrade_modal"></Upgrade>
 		<Settings ref="settings_modal"></Settings>
+		<FirstPlay ref="firstplay_modal"></FirstPlay>
 	</div>
 </template>
 
@@ -44,6 +43,8 @@ import Shop from "./components/Shop.vue";
 
 import Upgrade from "./components/Upgrade.vue";
 import Settings from "./components/Settings.vue";
+
+import FirstPlay from "./components/FirstPlay.vue";
 
 import store from "./store";
 import api from "@/api/idb.js";
@@ -68,19 +69,9 @@ export default {
 		};
 	},
 
-	components: { Modal, My, Bonus, Shop, Upgrade, Settings, VNumber },
+	components: { Modal, My, Bonus, Shop, Upgrade, Settings, FirstPlay, VNumber },
 	methods: {
-		test: function () {
-			ysdkG.feedback.canReview().then(({ value, reason }) => {
-				if (value) {
-					ysdkG.feedback.requestReview().then(({ feedbackSent }) => {
-						console.log(feedbackSent);
-					});
-				} else {
-					console.log(reason);
-				}
-			});
-		},
+		test: function () {},
 		click_btn: function () {
 			this.sound_click.play(); //Play sound effect
 			store.commit("click");
@@ -119,6 +110,7 @@ export default {
 			html5: true,
 		});
 
+		this.$refs.firstplay_modal.open();
 		/*store.dispatch('load').then(() => {
         this.$ml.change(store.state.lang);
     });*/
@@ -158,5 +150,9 @@ window.onload = () => {
 
 .paper {
 	padding: 0;
+}
+
+.click {
+	height: 100px;
 }
 </style>

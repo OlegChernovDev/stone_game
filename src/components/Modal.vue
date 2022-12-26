@@ -42,7 +42,7 @@
 }
 
 .modal-text {
-    overflow: scroll;
+    overflow: auto;
     max-height: 70vh;
 }
 
