@@ -1,6 +1,6 @@
 export default {
     ru: {
-        click: 'Добавить данные',
+        click: 'Собрать данные',
         progress: 'Достижения',
         settings: 'Настройки',
         reset_progress: 'Сбросить прогресс',
@@ -10,10 +10,13 @@ export default {
         per_sec: 'в сек.',
         in_total: 'Всего',
         watch_ad: 'Смотреть рекламу',
-        watch: 'Смотреть'
+        watch: 'Смотреть',
+        text: [
+            'Вы играете за робота, который был создан, чтобы управлять базой данный на межпланетной станции. Ваша задача - собирать данные, чтобы увеличивать количество записей в базе. Чем больше число, тем больше ресурсов вы можете собрать.'
+        ]
     },
     en: {
-        click: 'Add Data',
+        click: 'Collect Data',
         progress: 'Achievement',
         settings: 'Settings',
         reset_progress: 'Reset progress',
@@ -23,6 +26,9 @@ export default {
         per_sec: 'per sec.',
         in_total: 'In total',
         watch_ad: 'Watch ads',
-        watch: 'Watch'
+        watch: 'Watch',
+        text: [
+            'Write a text!'
+        ]
     }
 }

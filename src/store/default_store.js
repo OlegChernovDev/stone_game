@@ -1,7 +1,7 @@
 export default {
     lang: 'russian', //english
-    counter_click: 0,
-    click: 1,
+    counter_click: 0,  //валюта
+    click: 1, //за клик
     auto_click: 0,
     first_play: true,
     time: 0,
@@ -77,6 +77,12 @@ export default {
             status: false
         }
     ],
+    raid: {
+        chance: 0.5, //шанс победы
+        winning: 2, //+ случае победы
+        loss: 4, //- в случае проигрыша
+        ransom: 1 //стоимость выкупа
+    },
     ad: {
         reward_video: 1000
     }

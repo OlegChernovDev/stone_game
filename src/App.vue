@@ -16,7 +16,12 @@
 				>+ {{ $store.state.click }}</span
 			>
 		</transition>
-
+		<button
+			class="btn-block btn-secondary click"
+			@click.prevent="open_raid"
+		>
+			Raid
+		</button>
 		<p style="text-align: center">+ {{ $store.state.auto_click }} {{ $ml.get("per_sec") }}</p>
 		<button
 			class="btn-block btn-secondary click"
@@ -45,6 +50,7 @@
 		<Upgrade ref="upgrade_modal"></Upgrade>
 		<Settings ref="settings_modal"></Settings>
 		<FirstPlay ref="firstplay_modal"></FirstPlay>
+		<Raid ref="raid_modal"></Raid>
 	</div>
 </template>
 
@@ -58,6 +64,7 @@ import Upgrade from "./components/Upgrade.vue";
 import Settings from "./components/Settings.vue";
 
 import FirstPlay from "./components/FirstPlay.vue";
+import Raid from "./components/Raid.vue";
 
 import store from "./store";
 import api from "@/api/idb.js";
@@ -89,9 +96,15 @@ export default {
 		Upgrade,
 		Settings,
 		FirstPlay,
+		Raid,
 		VNumber,
 	},
 	methods: {
+		open_raid: function () {
+			this.$refs.raid_modal.open();
+
+			store.commit('pre_raid');
+		},
 		click_btn: function (event) {
 			this.seen = !this.seen;
 

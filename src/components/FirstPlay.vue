@@ -2,7 +2,7 @@
 	<div>
 		<Modal title="Слушай сюда ублюдок мать твою" ref="modal">
 		
-				<vue-typed-js :typeSpeed="40" :cursorChar="'_'" :strings="text">
+				<vue-typed-js :typeSpeed="40" :cursorChar="'_'" :strings="$ml.get('text')">
 					<p class="typing"></p>
 				</vue-typed-js>
 		
@@ -18,13 +18,6 @@ import VueTypedJs from "vue-typed-js";
 export default {
 	name: "FirstPlay",
 	components: { Modal },
-    data() {
-		return {
-            text: [
-                'Вы играете за робота, который был создан, чтобы управлять базой данный на межпланетной станции. Ваша задача- кликать на экран, чтобы увеличивать количество собираемых данных в базе. Чем больше число, тем больше ресурсов вы можете собрать.'
-            ]
-        }
-    },
 	methods: {
 		open: function () {
 			this.$refs.modal.open();

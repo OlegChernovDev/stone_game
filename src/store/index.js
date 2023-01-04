@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import api from '@/api/idb.js'
+import core from '@/api/core.js'
 import default_store from './default_store'
 
 Vue.use(Vuex)
@@ -43,8 +44,24 @@ export default new Vuex.Store({
 			}
 		},
 		first_play: function (state) {
-			state.first_play = false
-			console.log(state.first_play)
+			state.first_play = false;
+		}, 
+		pre_raid: function (state) { //рассчёт всех показателей рейда перед началом битвы
+			let ransom = Math.floor(state.counter_click * 0.2);
+
+			state.raid.chance = core.getRandomInt(3, 8) / 10;
+			state.raid.ransom = ransom;
+			state.raid.winning = ransom;
+			state.raid.loss = ransom * 2.5;
+		},
+		win: function (state) {
+			
+		},
+		defeat: function (state) {
+			state.counter_click -= state.raid.loss;
+		},
+		ransom: function (state) { //выкуп
+			state.counter_click -= state.raid.ransom;
 		}
 	},
 	actions: {
@@ -56,7 +73,7 @@ export default new Vuex.Store({
 				result => {
 					context.commit('setState', result);
 					return new Promise((resolve, reject) => {
-						resolve()
+						resolve();
 					})
 				});
 		},
