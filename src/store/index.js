@@ -1,104 +1,29 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import api from '@/api/idb.js'
+import default_store from './default_store'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-      lang: 'russian', //english
-      counter_click: 11,
-      auto_click: 0,
-      time: 0,
-      complited: [],
-      shop: [
-        {
-          title: 'Title 1',
-          cost: 10,
-          award: 1,
-          count: 0
-        },
-        {
-          title: 'Title 2',
-          cost: 100,
-          award: 1,
-          count: 0
-        },
-        {
-          title: 'Title 3',
-          cost: 1000,
-          award: 1,
-          count: 0
-        },
-        {
-          title: 'Title 4',
-          cost: 10000,
-          award: 1,
-          count: 0
-        },
-        {
-          title: 'Title 5',
-          cost: 100000,
-          award: 1,
-          count: 0
-        },
-        {
-          title: 'Title 6',
-          cost: 1000000,
-          award: 1,
-          count: 0
-        },
-        {
-          title: 'Title 7',
-          cost: 10000000,
-          award: 1,
-          count: 0
-        },
-        {
-          title: 'Title 8',
-          cost: 100000000,
-          award: 100,
-          count: 0
-        },
-      ],
-      progress: [
-        {
-          id: 0,
-          text: 'набрать 10 монет',
-          condition: 10,
-          status: false
-        },
-        {
-          id: 1,
-          text: 'набрать 15 кликов',
-          condition: 15,
-          status: false
-        },
-        {
-          id: 2,
-          text: 'набрать 20 кликов',
-          condition: 20,
-          status: false
-        }
-      ], 
-      ad: {
-        reward_video: 1000
-      }
-  },
+  state: default_store,
   mutations: {
     click: function(state) {
-      state.counter_click++;
+      state.counter_click += state.click;
     },
     auto_click: function(state) {
       state.counter_click += state.auto_click;
     },
     clear: function(state) {
-      state.lang = 'russian';
+      /* state.lang = 'russian';
       state.counter_click = 0;
       state.complited = [];
       state.progress.forEach(function(item, i, arr) {
             state.progress[i].status = false;
-        });
+        }); */
+
+        console.log(state)
+        state.hotUpdate(default_store)
     },
     setProgress: function(state, data) {
       state.progress[data.i].status = data.status;
@@ -117,6 +42,10 @@ export default new Vuex.Store({
         state.auto_click += shop_item.award;
         state.shop[index].count ++;
       }
+    },
+    first_play: function (state) {
+      state.first_play = false
+	  console.log(state.first_play)
     }
   },
   actions: {

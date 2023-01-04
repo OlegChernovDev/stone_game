@@ -1,19 +1,27 @@
 <template>
 	<div id="app" class="paper">
-		
 		<h2 style="text-align: center">
 			<v-number
 				:speed="100"
 				v-model="$store.state.counter_click"
 			></v-number>
 		</h2>
+		<transition name="fade">
+			<span ref="click_text" id="click_text" v-show="seen"
+				>+ {{ $store.state.click }}</span
+			>
+		</transition>
+
 		<p style="text-align: center">+ {{ $store.state.auto_click }} в сек.</p>
-		<button class="btn-block btn-secondary click" @click.prevent="click_btn">
+		<button
+			class="btn-block btn-secondary click"
+			@click.prevent="click_btn"
+		>
 			{{ $ml.get("click") }}
 		</button>
 		<br /><br />
 
-		<div class="row">
+		<div class="row menu">
 			<div class="col col-4">
 				<button class="btn-block" @click="open_bonus">Бонус</button>
 			</div>
@@ -26,6 +34,7 @@
 				</button>
 			</div>
 		</div>
+
 		<Bonus ref="bonus_modal"></Bonus>
 		<Shop ref="shop_modal"></Shop>
 		<Upgrade ref="upgrade_modal"></Upgrade>
@@ -60,6 +69,7 @@ export default {
 	data() {
 		return {
 			sound_click: "",
+			seen: false,
 			socket: io("http://localhost:3000", {
 				withCredentials: true,
 				extraHeaders: {
@@ -69,13 +79,37 @@ export default {
 		};
 	},
 
-	components: { Modal, My, Bonus, Shop, Upgrade, Settings, FirstPlay, VNumber },
+	components: {
+		Modal,
+		My,
+		Bonus,
+		Shop,
+		Upgrade,
+		Settings,
+		FirstPlay,
+		VNumber,
+	},
 	methods: {
 		test: function () {},
-		click_btn: function () {
+		click_btn: function (event) {
+			this.seen = !this.seen;
+
+			this.$refs.click_text.style.userSelect = "none";
+			this.$refs.click_text.style.zIndex = "1234";
+			this.$refs.click_text.style.position = "absolute";
+			this.$refs.click_text.style.left = event.clientX + 15 + "px";
+			this.$refs.click_text.style.top = event.clientY - 15 + "px";
+
+			setTimeout(() => {
+				this.seen = !this.seen;
+			}, 200);
+
 			this.sound_click.play(); //Play sound effect
 			store.commit("click");
+
 			this.check();
+
+			console.log();
 			return false;
 			//store.dispatch('save');
 		},
@@ -96,7 +130,7 @@ export default {
 		},
 		check: function () {
 			let arr = store.state.progress;
-			console.log(store.state.counter_click);
+
 			arr.forEach(function (item, i, arr) {
 				if (item.condition == store.state.counter_click) {
 					store.commit("setProgress", { i: i, status: true });
@@ -110,18 +144,23 @@ export default {
 			html5: true,
 		});
 
-		this.$refs.firstplay_modal.open();
-		/*store.dispatch('load').then(() => {
-        this.$ml.change(store.state.lang);
-    });*/
+		store.dispatch("load").then(() => {
+			this.$ml.change(store.state.lang);
+
+			if (store.state.first_play == true) {
+				//показ окна приветсвия при первом запуске
+				store.commit("first_play");
+				console.log(111);
+				this.$refs.firstplay_modal.open();
+			}
+		});
 	},
 };
 
 window.onload = () => {
 	setInterval(function () {
-		//store.dispatch('save');
+		store.dispatch("save");
 	}, 200);
-
 	setInterval(function () {
 		store.commit("auto_click");
 	}, 1000);
@@ -129,6 +168,36 @@ window.onload = () => {
 </script>
 
 <style>
+@media (max-width: 640px) {
+	.row {
+		flex-flow: column !important;
+	}
+	.menu {
+		width: 100% !important;
+	}
+	.col {
+		margin: 10px !important;
+		max-width: 100% !important;
+		padding: 0px !important;
+	}
+}
+
+#click_text {
+	user-select: "none";
+	z-index: "1234";
+	position: "absolute";
+}
+
+.menu {
+	width: 640px;
+	bottom: 0;
+	left: 0;
+	/* padding: 10px; */
+	position: fixed;
+	right: 0;
+	/* text-align: left; */
+	/* z-index: 99;*/
+}
 .control {
 	width: 100%;
 	display: flex;
@@ -155,4 +224,31 @@ window.onload = () => {
 .click {
 	height: 100px;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	opacity: 0;
+}
+
+/*
+.bounce-enter-active {
+  animation: bounce-in .8s;
+}
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}*/
 </style>

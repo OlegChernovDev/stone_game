@@ -10,6 +10,7 @@
 <script>
 	import Modal from './Modal.vue'
 	import store from './../store'
+	import default_store from '../store/default_store'
 
 	export default {
 		name: 'Settngs',
@@ -31,8 +32,9 @@
 	            }
 	        },
 	        clear: function() {
-	        	store.commit('clear');
-            store.dispatch('save');
+				store.replaceState(default_store)
+	        	//store.commit('clear');
+            	store.dispatch('save');
 	        },
 		}
 	}
