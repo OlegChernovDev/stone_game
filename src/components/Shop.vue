@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<Modal title="Магазин" ref="modal">
+		<Modal :title="$ml.get('shop')" ref="modal">
 			<p>
-				монеты: {{ $store.state.counter_click }} - в сек. : {{ $store.state.auto_click }}
+				монеты: {{ $store.state.counter_click }} - {{ $ml.get("per_sec") }} : {{ $store.state.auto_click }}
 			</p>
 			<div
 				class="block row"
@@ -16,12 +16,12 @@
 					</h5>
 					<h5 v-else>{{ item.title }}</h5>
 
-					<p v-if="index == 0">+{{ item.award }} в сек.</p>
+					<p v-if="index == 0">+{{ item.award }} {{ $ml.get("per_sec") }}</p>
 					<p v-else-if="$store.state.shop[index - 1].count == 0">
-						+??? в сек.
+						+??? {{ $ml.get("per_sec") }}
 					</p>
-					<p v-else>+{{ item.award }} в сек.</p>
-					<p>Всего {{ item.count }}</p>
+					<p v-else>+{{ item.award }} {{ $ml.get("per_sec") }}</p>
+					<p>{{ $ml.get("in_total") }} {{ item.count }}</p>
 				</div>
 				<div class="col-4 col">
 					<button

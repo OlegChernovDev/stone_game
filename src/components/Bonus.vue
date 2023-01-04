@@ -1,9 +1,9 @@
 <template>
 	<div>
-		<Modal title="Бонус" ref="modal">
+		<Modal :title="$ml.get('bonus')" ref="modal">
 			<div class="block row">
 				<div class="col-9 col">
-					<h5>Смотреть рекламу</h5>
+					<h5>{{ $ml.get("watch_ad") }}</h5>
 					<p>
 						+ {{ rewardCoins }}
 						монет
@@ -11,7 +11,7 @@
 				</div>
 				<div class="col-3 col">
 					<button class="btn-block" @click="reward_video">
-						Смотреть
+						{{ $ml.get("watch") }}
 					</button>
 				</div>
 			</div>

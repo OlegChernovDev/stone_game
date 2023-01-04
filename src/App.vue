@@ -1,18 +1,23 @@
 <template>
 	<div id="app" class="paper">
-		<h2 style="text-align: center">
-			<v-number
+		<div class="row row1">
+  <div class="sm-10 md-8 lg-10 col">данных в базе</div>
+  <div class="sm-2 md-4 lg-2 col">			<v-number
 				:speed="100"
 				v-model="$store.state.counter_click"
-			></v-number>
-		</h2>
+			></v-number></div>
+</div>
+<div class="row row1">
+  <div class="sm-10 md-8 lg-10 col">{{ $ml.get("per_sec") }}</div>
+  <div class="sm-2 md-4 lg-2 col">	{{ $store.state.auto_click }}</div>
+</div>
 		<transition name="fade">
 			<span ref="click_text" id="click_text" v-show="seen"
 				>+ {{ $store.state.click }}</span
 			>
 		</transition>
 
-		<p style="text-align: center">+ {{ $store.state.auto_click }} в сек.</p>
+		<p style="text-align: center">+ {{ $store.state.auto_click }} {{ $ml.get("per_sec") }}</p>
 		<button
 			class="btn-block btn-secondary click"
 			@click.prevent="click_btn"
@@ -23,10 +28,10 @@
 
 		<div class="row menu">
 			<div class="col col-4">
-				<button class="btn-block" @click="open_bonus">Бонус</button>
+				<button class="btn-block" @click="open_bonus">{{ $ml.get("bonus") }}</button>
 			</div>
 			<div class="col col-4">
-				<button class="btn-block" @click="open_shop">Магазин</button>
+				<button class="btn-block" @click="open_shop">{{ $ml.get("shop") }}</button>
 			</div>
 			<div class="col col-4">
 				<button class="btn-block" @click="open_settings">
@@ -45,7 +50,6 @@
 
 <script>
 import Modal from "./components/Modal.vue";
-import My from "./components/My.vue";
 
 import Bonus from "./components/Bonus.vue";
 import Shop from "./components/Shop.vue";
@@ -78,10 +82,8 @@ export default {
 			}),
 		};
 	},
-
 	components: {
 		Modal,
-		My,
 		Bonus,
 		Shop,
 		Upgrade,
@@ -90,7 +92,6 @@ export default {
 		VNumber,
 	},
 	methods: {
-		test: function () {},
 		click_btn: function (event) {
 			this.seen = !this.seen;
 
@@ -109,7 +110,6 @@ export default {
 
 			this.check();
 
-			console.log();
 			return false;
 			//store.dispatch('save');
 		},
@@ -168,6 +168,12 @@ window.onload = () => {
 </script>
 
 <style>
+.row1 {
+	margin: 0 !important;
+}
+.row1 > .col {
+	padding: 5px !important;
+}
 @media (max-width: 640px) {
 	.row {
 		flex-flow: column !important;

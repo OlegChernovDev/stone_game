@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Modal :title="$ml.get('settings')" ref="modal">	
-			<button type="button" @click="clear">Clear</button>
+			<button type="button" @click="clear">{{ $ml.get('reset_progress') }}</button>
 			<button type="button" @click="change_lang">{{ $ml.get('change_lang') }}</button>
 		</Modal>
     </div>

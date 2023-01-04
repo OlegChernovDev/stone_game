@@ -67,7 +67,7 @@
     }
 @media (max-width: 640px) {
     .modal-body {
-        width: 100%;
+        width: 100% !important;
         height: 100%;
         top: 0;
     }

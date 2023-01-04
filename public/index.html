@@ -8,6 +8,7 @@
 	<link rel="icon" href="<%= BASE_URL %>favicon.ico">
 
 	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="star.css">
 	<title><%= htmlWebpackPlugin.options.title %></title>
 
 	<script src="https://yandex.ru/games/sdk/v2"></script>
@@ -41,13 +42,18 @@
 
 
 	</script>
-</head>
 
+</head>
 <body>
 	<noscript>
 		<strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
 			Please enable it to continue.</strong>
 	</noscript>
+
+	<div id="stars"></div>
+	<div id="stars2"></div>
+	<div id="stars3"></div>
+
 	<div id="app"></div>
 	<!-- built files will be auto injected -->
 </body>

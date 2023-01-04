@@ -1,14 +1,28 @@
 export default {
     ru: {
-        click: 'Клик',
+        click: 'Добавить данные',
         progress: 'Достижения',
         settings: 'Настройки',
-        change_lang: 'English'
+        reset_progress: 'Сбросить прогресс',
+        change_lang: 'English',
+        bonus: 'Бонус',
+        shop: 'Магазин',
+        per_sec: 'в сек.',
+        in_total: 'Всего',
+        watch_ad: 'Смотреть рекламу',
+        watch: 'Смотреть'
     },
     en: {
-        click: 'Click',
+        click: 'Add Data',
         progress: 'Achievement',
         settings: 'Settings',
-        change_lang: 'Русский'
+        reset_progress: 'Reset progress',
+        change_lang: 'Русский',
+        bonus: 'Bonus',
+        shop: 'Shop',
+        per_sec: 'per sec.',
+        in_total: 'In total',
+        watch_ad: 'Watch ads',
+        watch: 'Watch'
     }
 }

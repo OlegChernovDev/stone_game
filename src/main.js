@@ -4,7 +4,8 @@ import store from './store'
 import './ml'
 
 import VueTypedJs from 'vue-typed-js'
-Vue.use(VueTypedJs)
+Vue.use(VueTypedJs);
+
 import './../node_modules/papercss/dist/paper.css';
 
 Vue.config.productionTip = false
